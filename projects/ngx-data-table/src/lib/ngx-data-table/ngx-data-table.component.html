@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" class="filter">
+    </mat-form-field>
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <ng-container [matColumnDef]="cols" *ngFor="let cols of displayedColumns; let i = index">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{cols}}</mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="{'col-value': element.details === undefined}">
+        <!-- expand caret -->
+        <span *ngIf="i === 0 && element.details">
+          <span *ngIf="expandedElement && expandedElement[cols] === element[cols]; else plusIcon" class="expand-icon">&#9650;</span>
+          <ng-template #plusIcon><span class="expand-icon">&#9660;</span></ng-template>
+        </span>
+        <span>{{element[cols]}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        <ngx-data-table [data]="detail.element.details" class="detail-table"></ngx-data-table>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.expanded]="expandedElement == row"
+              (click)="toggleRow(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+    [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+    style="overflow: hidden"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+
+    [length]="dataSource?.data?.length"
+    [pageIndex]="0"
+    [pageSize]="25"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

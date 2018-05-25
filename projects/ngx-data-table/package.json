@@ -1,0 +1,27 @@
+{
+  "name": "ngx-nested-data-table",
+  "version": "0.0.7",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/material": "^6.1.0",
+    "@angular/cdk": "^6.1.0"
+  },
+  "description": "angular master-detail table angular material style",
+  "main": "src/public_api.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniele-zurico/library-ngx-data-table/tree/master-detail"
+  },
+  "keywords": [
+    "angular",
+    "master-detail",
+    "table",
+    "material"
+  ],
+  "author": "Daniele Zurico <daniele.zurico@gmail.com> (http://www.dzurico.com)",
+  "license": "ISC"
+}
